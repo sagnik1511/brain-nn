@@ -1,0 +1,14 @@
+# Cache files
+__pycache__/
+
+# package info
+brain.egg-info/
+
+# test file
+test_network.py
+
+# settings files
+.vscode/
+
+# ssh keys
+sagnik1511*

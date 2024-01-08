@@ -12,14 +12,15 @@ class ReLU(Neuron):
         output (y) = x if x > 0
                    = 0 elsewhere
         """
-        return np.where(input_data > 0, input_data, 0)
+        self.input_data = input_data
+        return np.maximum(0, input_data)
 
     def backward(self, grads, **kwargs):
         """
         output (y') = 1 if x > 0
                     = 0 elsewhere
         """
-        return np.where(grads > 0, 1, 0)
+        return grads * (self.input_data >= 0)
 
 
 class LeakyReLU(Neuron):
@@ -43,15 +44,18 @@ class LeakyReLU(Neuron):
 
 class TanH(Neuron):
     def forward(self, input_data):
+        self.input_data = input_data
         return np.tanh(input_data)
 
     def backward(self, grads):
-        return 1 - np.tanh(grads) ** 2
+        return (1 - np.tanh(self.input_data) ** 2) * grads
 
 
 class Sigmoid(Neuron):
     def forward(self, input_data):
+        self.input_data = input_data
         return 1 / (1 + np.exp(-input_data))
 
     def backward(self, grads):
-        return self.forward(grads) * (1 - self.forward(grads))
+        d_x = self.forward(self.input_data)
+        return d_x * (1 - d_x) * grads

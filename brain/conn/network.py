@@ -2,6 +2,10 @@
 This module holds the code for a series / branch of layers called as network
 """
 
+from typing import List
+
+from ..neuron.common import Neuron
+
 
 class Sequential:
     """
@@ -9,7 +13,7 @@ class Sequential:
     """
 
     def __init__(self, layers, **kwargs):
-        self.layers = layers
+        self.layers: List[Neuron] = layers
 
     def forward(self, x):
         for layer in self.layers:

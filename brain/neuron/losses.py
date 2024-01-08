@@ -11,7 +11,7 @@ class MSE(Neuron):
         return np.mean(np.square(y_pred - y_true))
 
     def backward(y_pred, y_true):
-        return 2 * (y_pred - y_true) / y_pred.shape[0]
+        return 2 * (y_pred - y_true) / len(y_true)
 
 
 class BCE(Neuron):
